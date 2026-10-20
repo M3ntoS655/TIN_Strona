@@ -1,12 +1,22 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 20px;
 }
-/* ==== Nagłówek ====  */
+
 .header {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     margin: 20px auto;
     padding: 15px;
     background-color: white;
@@ -29,10 +39,9 @@ body {
     color: #ccc;
 }
 
-/* ==== Nagłówek ====  */
-
 .klienci {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     margin: 40px auto;
     padding: 25px;
     background-color: white;
@@ -44,7 +53,8 @@ body {
 }
 
 .index {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     margin: 40px auto;
     padding: 25px;
     background-color: white;
@@ -117,7 +127,7 @@ input {
     border-color: black;
 }
 
-#klient, #wypozyczenia, #bron {
+#klient, #wypozyczenia, #bron, #editKlient, #editBron {
     background-color: #007BFF;
     width: 100%;
     padding: 12px; 
@@ -128,10 +138,9 @@ input {
     cursor: pointer;
 }
 
-/* ==== Stopka ==== */
-
-.footer{
-    width: 600px;
+.footer {
+    width: 100%;
+    max-width: 600px;
     margin: 20px auto;
     padding: 15px;
     background-color: white;
@@ -141,10 +150,9 @@ input {
     color: #007BFF;
 }
 
-/* ==== Stopka ==== */
-
 .container {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     margin: 30px auto;
     display: flex;
     flex-direction: column;
@@ -152,18 +160,20 @@ input {
 }
 
 .container-wyp {
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px;
     margin: 30px auto;
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-.katalog-broni, .formularz-bron, .katalog-wyp{
+.katalog-broni, .formularz-bron, .katalog-wyp {
     background-color: white;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow-x: auto;
 }
 
 #tabela-klientow, .tabela-broni, .tabela-wyp {
@@ -194,12 +204,11 @@ input {
     display: block;
     min-height: 20px;
     margin-top: 5px;
-
     color: darkred;
     font-size: 0.9rem;
 }
 
-.button-danger-outline{ 
+.button-danger-outline { 
     font-weight: 600;
     padding: 10px 10px;
     border-radius: 7px;
@@ -247,13 +256,13 @@ input {
 }
 
 dialog {
-  width: min(440px, calc(100% - 32px));
-  max-width: none;
-  border: 1px solid #e0e4ec;
-  border-radius: 14px;
-  padding: 28px;
-  box-shadow: 0 20px 70px #111d3573;
-  color: inherit;
+    width: min(440px, calc(100% - 32px));
+    max-width: none;
+    border: 1px solid #e0e4ec;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 20px 70px #111d3573;
+    color: inherit;
 }
 
 .warning { color: #9f2636; font-size: .9rem; }
@@ -262,7 +271,7 @@ dialog {
 
 #editButtons { display: flex; justify-content: center; gap: 10px; margin-top: 24px; }
 
-.button-danger{
+.button-danger {
     font-weight: 600;
     padding: 10px 10px;
     border-radius: 7px;
@@ -277,7 +286,7 @@ dialog {
     color: #ffffffc0;
 }
 
-.button-secondary, #editAnuluj{
+.button-secondary, #editAnuluj {
     font-weight: 600;
     padding: 10px 10px;
     border-radius: 7px;
@@ -288,6 +297,6 @@ dialog {
     border-color: black; 
 }
 
-.button-secondary:hover, #anuluj:hover, #editAnuluj:hover{
+.button-secondary:hover, #anuluj:hover, #editAnuluj:hover {
     background-color: #f5f5f5;
 }

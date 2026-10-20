@@ -92,9 +92,21 @@ dataOd.addEventListener('blur', () => {
     validateDataField(dataOd, 'data-odError', 'data-od');
 });
 
+dataOd.addEventListener('change', () => {
+    if (dataOd.value) {
+        dataDo.min = dataOd.value;
+    }
+});
+
 dataDo.addEventListener('blur', () => {
     clearFieldError(dataDo, 'data-doError');
     validateDataField(dataDo, 'data-doError', 'data-do');
+});
+
+dataDo.addEventListener('change', () => {
+    if (dataDo.value) {
+        dataOd.max = dataDo.value;
+    }
 });
 
 form.addEventListener('reset', () => {
@@ -341,13 +353,32 @@ editDataOd.addEventListener('blur', () => {
     validateDataEditField(editDataOd, 'editDataOdError', 'DataOd');
 });
 
+editDataOd.addEventListener('change', () => {
+    if (editDataOd.value) {
+        editDataDo.min = editDataOd.value;
+        editDataOddania.min = editDataOd.value;
+    }
+});
 
 editDataDo.addEventListener('blur', () => {
     validateDataEditField(editDataDo, 'editDataDoError', 'DataDo');
 });
 
+editDataDo.addEventListener('change', () => {
+    if (editDataDo.value) {
+        editDataOd.max = editDataDo.value;
+        editDataOddania.min = editDataDo.value;
+    }
+});
+
 editDataOddania.addEventListener('blur', () => {
     validateCenaField(editDataOddania, 'editDataOddaniaError', 'DataOddania');
+});
+
+editDataOddania.addEventListener('change', () => {
+    if (editDataOddania.value) {
+        editDataDo.max = editDataOddania.value;
+    }
 });
 
 editCena.addEventListener('blur', () => {
@@ -393,10 +424,9 @@ wypTable.addEventListener('click', (event) => {
 
 function formatDateForInput(dateStr) {
     if (!dateStr || dateStr.trim() === "") return "";
-    // Jeśli format to DD-MM-YYYY, zamień na YYYY-MM-DD
     const parts = dateStr.split('-');
     if (parts.length === 3 && parts[0].length === 2) {
         return `${parts[2]}-${parts[1]}-${parts[0]}`;
     }
-    return dateStr; // Jeśli już jest YYYY-MM-DD
+    return dateStr;
 }
