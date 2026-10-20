@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Wypożyczalnia - Dane klienta</title>
+</head>
+<body>
+    <header class="header">
+        <nav>
+        <a href="../index.html">Strona główna</a>
+        <span>|</span>
+        <a href="klient.html" class="active">Dane klienta</a>
+        <span>|</span>
+        <a href="wypozyczenia.html">Wypożyczenia</a>
+        <span>|</span>
+        <a href="bron.html">Broń</a>
+        </nav>
+    </header>
+
+    <div class="klienci">
+        <table id="tabela-klientow">
+            <h2>Dane klientów</h2>
+                <thead>
+                    <tr>
+                        <th>PESEL</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Nr. Tel.</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12345678890</td>
+                        <td data-klient-name>Jan</td>
+                        <td data-klient-surname>Kowalski</td>
+                        <td>123456789</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                    <tr>
+                        <td>00987654321</td>
+                        <td data-klient-name>Juliusz</td>
+                        <td data-klient-surname>Cezar</td>
+                        <td>546912338</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                    <tr>
+                        <td>37563928371</td>
+                        <td data-klient-name>Kazimierz</td>
+                        <td data-klient-surname>Wielki</td>
+                        <td>231888543</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="button-add-klient" data-action="add">Dodaj klienta</button>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+    </div>
+
+    <footer class="footer">
+        <p>Strona do wypożyczania broni. -> Jakub Cywiński s33189 <- </p>
+    </footer>
+
+    <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-description">
+    <h2 id="delete-title">Potwierdź usunięcie</h2>
+    <p id="delete-description">
+      Czy na pewno chcesz usunąć klienta <strong id="selected-klient-name"></strong>?
+    </p>
+    <p class="warning">Tej operacji nie będzie można cofnąć w rzeczywistej aplikacji.</p>
+
+    <form method="dialog" class="dialog-actions">
+      <button type="submit" value="cancel" class="button button-secondary" autofocus>Anuluj</button>
+      <button type="submit" value="delete" class="button button-danger">Tak, usuń</button>
+    </form>
+    </dialog>
+
+    <dialog id="add-klient-dialog" aria-labelledby="add-klient-title" aria-describedby="add-klient-description">
+        <form id="klientForm" novalidate>
+            <h2>Dane klienta</h2>
+
+            <label for="imie">Imię:</label>
+            <input type="text" id="imie" name="imie" required minLength="2" maxlength="50" placeholder="Imie" aria-describedby="imieError">
+            <span id="imieError" class="error" aria-live="polite"></span>
+
+            <label for="nazwisko">Nazwisko:</label>
+            <input type="text" id="nazwisko" name="nazwisko" required minlength="2" maxlength="50" placeholder="Nazwisko" aria-describedby="nazwiskoError">
+            <span id="nazwiskoError" class="error" aria-live="polite"></span>
+
+            <label for="pesel">PESEL:</label>
+            <input type="text" id="pesel" name="pesel" required minlength="11" maxlength="11" inputmode="numeric" pattern="[0-9]*" placeholder="PESEL" aria-describedby="peselError">
+            <span id="peselError" class="error" aria-live="polite"></span>
+
+            <label for="numer">Numer telefonu:</label>
+            <input type="tel" id="numer" name="numer" required minlength="9" maxlength="9" placeholder="Nr telefonu" aria-describedby="numerError">
+            <span id="numerError" class="error" aria-live="polite"></span>
+
+            <section class="result" aria-live="polite">
+            <p id="successMessage" class="success"></p>
+            </section>
+
+            <button type="submit" id="wyslij">Wyślij</button>
+            <button type="reset" id="wyczysc">Wyczyść</button>
+            <button type="button" id="anuluj">Anuluj</button>
+        </form>
+    </dialog>
+
+    <dialog id="edit-klient-dialog" aria-labelledby="edit-klient-title" aria-describedby="edit-klient-description">
+        <form id="editKlientForm" novalidate>
+            <h2>Zmiana danych</h2>
+
+            <label for="editImie">Imię:</label>
+            <input type="text" id="editImie" name="imie" required minLength="2" maxlength="50" placeholder="Imie" aria-describedby="editImieError">
+            <span id="editImieError" class="error" aria-live="polite"></span>
+
+            <label for="editNazwisko">Nazwisko:</label>
+            <input type="text" id="editNazwisko" name="nazwisko" required minlength="2" maxlength="50" placeholder="Nazwisko" aria-describedby="editNazwiskoError">
+            <span id="editNazwiskoError" class="error" aria-live="polite"></span>
+
+            <label for="editPesel">PESEL:</label>
+            <input type="text" id="editPesel" name="pesel" required minlength="11" maxlength="11" inputmode="numeric" pattern="[0-9]*" placeholder="PESEL" aria-describedby="editPeselError">
+            <span id="editPeselError" class="error" aria-live="polite"></span>
+
+            <label for="editNumer">Numer telefonu:</label>
+            <input type="tel" id="editNumer" name="numer" required minlength="9" maxlength="9" placeholder="Nr telefonu" aria-describedby="editNumerError">
+            <span id="editNumerError" class="error" aria-live="polite"></span>
+            <div id="editButtons">
+                <button type="button" id="editAnuluj">Anuluj</button>
+                <button type="submit" id="editWyslij">Zatwierdz</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="../js/klient-form.js"></script>
+
+</body>
+</html>

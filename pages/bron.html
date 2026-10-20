@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczalnia - Baza Broni</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <nav>
+            <a href="../index.html">Strona główna</a>
+            <span>|</span>
+            <a href="klient.html">Dane klienta</a>
+            <span>|</span>
+            <a href="wypozyczenia.html">Wypożyczenia</a>
+            <span>|</span>
+            <a href="bron.html" class="active">Broń</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <section class="katalog-broni">
+            <h2>Katalog Broni</h2>
+            <table class="tabela-broni">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Typ</th>
+                        <th>Model</th>
+                        <th>Kolor</th>
+                        <th>Cena (PLN/doba)</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td data-bron-typ>Pistolet</td>
+                        <td data-bron-model>Glock 17</td>
+                        <td data-bron-kolor>Czarny</td>
+                        <td>150.00</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td data-bron-typ>Karabinek</td>
+                        <td data-bron-model>AR-15</td>
+                        <td data-bron-kolor>Oliwkowy</td>
+                        <td>250.00</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td data-bron-typ>Pistolet</td>
+                        <td data-bron-model>CZ P-10C</td>
+                        <td data-bron-kolor>Czarny</td>
+                        <td>140.00</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="button-add-bron" data-action="add">Dodaj broń</button>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+    </div>
+
+
+    <footer class="footer">
+        <p>Strona do wypożyczania broni. -> Jakub Cywiński s33189 <- </p>
+    </footer>
+
+    <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-description">
+    <h2 id="delete-title">Potwierdź usunięcie</h2>
+    <p id="delete-description">
+      Czy na pewno chcesz usunąć broń <strong id="selected-bron-model"></strong>?
+    </p>
+    <p class="warning">Tej operacji nie będzie można cofnąć w rzeczywistej aplikacji.</p>
+
+    <form method="dialog" class="dialog-actions">
+      <button type="submit" value="cancel" class="button button-secondary" autofocus>Anuluj</button>
+      <button type="submit" value="delete" class="button button-danger">Tak, usuń</button>
+    </form>
+    </dialog>
+
+    <dialog id="add-bron-dialog" aria-labelledby="add-bron-title" aria-describedby="add-bron-description">
+        <form id="bronForm" novalidate>
+            <h2>Dodaj nową broń</h2>
+
+            <label for="typ">Typ broni:</label>
+            <input type="text" id="typ" name="typ" required minlength="2" maxlength="50" placeholder="Typ: np. Karabin" aria-describedby="typError">
+            <span id="typError" class="error" aria-live="polite"></span>
+
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required minlength="2" maxlength="50" placeholder="Model: np. Glock-17" aria-describedby="modelError">
+            <span id="modelError" class="error" aria-live="polite"></span>
+
+            <label for="kolor">Kolor:</label>
+            <input type="text" id="kolor" name="kolor" required minlength="2" maxlength="50" placeholder="Kolor: np. Czarny" aria-describedby="kolorError">
+            <span id="kolorError" class="error" aria-live="polite"></span>
+
+            <label for="cena">Cena wypożyczenia:</label>
+            <input type="number" id="cena" name="cena" required step="0.01" min="0" placeholder="0.00" aria-describedby="cenaError">
+            <span id="cenaError" class="error" aria-live="polite"></span>
+
+            <section class="result" aria-live="polite">
+            <p id="successMessage" class="success"></p>
+            </section>
+
+            <button type="submit" id="wyslij">Wyślij</button>
+            <button type="reset" id="wyczysc">Wyczyść</button>
+            <button type="button" id="anuluj">Anuluj</button>
+        </form>
+    </dialog>
+
+    <dialog id="edit-bron-dialog" aria-labelledby="edit-bron-title" aria-describedby="edit-bron-description">
+        <form id="editBronForm" novalidate>
+            <h2>Zmiana danych</h2>
+
+            <label for="editTyp">Typ:</label>
+            <input type="text" id="editTyp" name="typ" required minLength="2" maxlength="50" placeholder="Typ: np. Karabin" aria-describedby="editTypError">
+            <span id="editTypError" class="error" aria-live="polite"></span>
+
+            <label for="editModel">Model:</label>
+            <input type="text" id="editModel" name="model" required minlength="2" maxlength="50" placeholder="Model: np. Glock-17" aria-describedby="editModelError">
+            <span id="editModelError" class="error" aria-live="polite"></span>
+
+            <label for="editKolor">Kolor:</label>
+            <input type="text" id="editKolor" name="kolor" required minlength="2" maxlength="50" placeholder="Kolor: np. Czarny" aria-describedby="editKolorError">
+            <span id="editKolorError" class="error" aria-live="polite"></span>
+
+            <label for="editCena">Cena (PLN/doba):</label>
+            <input type="number" id="editCena" name="cena" required step="0.01" min="0" placeholder="0.00" aria-describedby="editCenaError">
+            <span id="editCenaError" class="error" aria-live="polite"></span>
+            <div id="editButtons">
+                <button type="button" id="editAnuluj">Anuluj</button>
+                <button type="submit" id="editWyslij">Zatwierdz</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="../js/bron-form.js"></script>
+
+</body>
+</html>

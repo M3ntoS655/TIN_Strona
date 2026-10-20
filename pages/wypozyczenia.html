@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczalnia - Wypożyczenia</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <nav>
+            <a href="../index.html">Strona główna</a>
+            <span>|</span>
+            <a href="klient.html">Dane klienta</a>
+            <span>|</span>
+            <a href="wypozyczenia.html" class="active">Wypożyczenia</a>
+            <span>|</span>
+            <a href="bron.html">Broń</a>
+        </nav>
+    </header>
+
+    <div class="container-wyp">
+
+        <section class="katalog-wyp">
+            <h2>Obecne wypozyczenia</h2>
+            <table class="tabela-wyp">
+                <thead>
+                    <tr>
+                        <th>PESEL</th>
+                        <th>ID Broni</th>
+                        <th>Data od</th>
+                        <th>Data do</th>
+                        <th>Faktyczna data oddania</th>
+                        <th>Cena</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-wyp-pesel>37563928371</td>
+                        <td data-wyp-id-broni>2</td>
+                        <td>12-10-2026</td>
+                        <td>15-10-2026</td>
+                        <td></td>
+                        <td></td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                    <tr>
+                        <td data-wyp-pesel>00987654321</td>
+                        <td data-wyp-id-broni>3</td>
+                        <td>10-10-2026</td>
+                        <td>12-10-2026</td>
+                        <td>12-10-2026</td>
+                        <td>420</td>
+                        <td><button type="button" class="button-edit" data-action="edit">Edytuj</button></td>
+                        <td><button type="button" class="button button-danger-outline" data-action="delete">Usuń</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="button-add-wyp" data-action="add">Dodaj wypozyczenie</button>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+        </section>
+    </div>
+
+
+    <footer class="footer">
+        <p>Strona do wypożyczania broni. -> Jakub Cywiński s33189 <- </p>
+    </footer>
+
+    <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-description">
+    <h2 id="delete-title">Potwierdź usunięcie</h2>
+    <p id="delete-description">
+      Czy na pewno chcesz usunąć wypozyczenie klienta: <strong id="selected-wyp-pesel"></strong> broni o id: <strong id="selected-wyp-id-broni"></strong>?
+    </p>
+    <p class="warning">Tej operacji nie będzie można cofnąć w rzeczywistej aplikacji.</p>
+
+    <form method="dialog" class="dialog-actions">
+      <button type="submit" value="cancel" class="button button-secondary" autofocus>Anuluj</button>
+      <button type="submit" value="delete" class="button button-danger">Tak, usuń</button>
+    </form>
+    </dialog>
+
+    <dialog id="add-wyp-dialog" aria-labelledby="add-wyp-title" aria-describedby="add-wyp-description">
+        <form id="wypForm" novalidate>
+            <h2>Dodaj nowe wypozyczenie</h2>
+
+            <label for="klient">Klient:</label>
+            <select id="klient" name="klient" required aria-describedby="klientError">
+                <option value="" disabled selected>Wybierz klienta</option>
+                <option value="12345678890">12345678890 Jan Kowalski</option>
+                <option value="00987654321">00987654321 Juliusz Cezar</option>
+                <option value="37563928371">37563928371 Kazimierz Wielki</option>
+            </select>
+            <span id="klientError" class="error" aria-live="polite"></span>
+
+            <label for="bron">Bron:</label>
+            <select id="bron" name="bron" required aria-describedby="bronError">
+                <option value="" disabled selected>Wybierz broń</option>
+                <option value="1">1 Glock-17</option>
+                <option value="2">2 AR-15</option>
+                <option value="3">3 CZ P-10C</option>
+            </select>
+            <span id="bronError" class="error" aria-live="polite"></span>
+
+            <label for="data-od">Data-od:</label>
+            <input type="date" id="data-od" name="data-od" required aria-describedby="data-odError">
+            <span id="data-odError" class="error" aria-live="polite"></span>
+
+            <label for="data-do">Data-do:</label>
+            <input type="date" id="data-do" name="date-do" required aria-describedby="data-doError">
+            <span id="data-doError" class="error" aria-live="polite"></span>
+
+            <section class="result" aria-live="polite">
+            <p id="successMessage" class="success"></p>
+            </section>
+
+            <button type="submit" id="wyslij">Wyślij</button>
+            <button type="reset" id="wyczysc">Wyczyść</button>
+            <button type="button" id="anuluj">Anuluj</button>
+        </form>
+    </dialog>
+
+    <dialog id="edit-wyp-dialog" aria-labelledby="edit-wyp-title" aria-describedby="edit-wyp-description">
+        <form id="editWypForm" novalidate>
+            <h2>Zmiana danych</h2>
+
+            <label for="editKlient">Klient:</label>
+            <select id="editKlient" name="editKlient" required aria-describedby="editKlientError">
+                <option value="" disabled selected>Wybierz klienta</option>
+                <option value="12345678890">12345678890 Jan Kowalski</option>
+                <option value="00987654321">00987654321 Juliusz Cezar</option>
+                <option value="37563928371">37563928371 Kazimierz Wielki</option>
+            </select>
+            <span id="editKlientError" class="error" aria-live="polite"></span>
+
+            <label for="editBron">Bron:</label>
+            <select id="editBron" name="editBron" required aria-describedby="editBronError">
+                <option value="" disabled selected>Wybierz broń</option>
+                <option value="1">1 Glock-17</option>
+                <option value="2">2 AR-15</option>
+                <option value="3">3 CZ P-10C</option>
+            </select>
+            <span id="editBronError" class="error" aria-live="polite"></span>
+
+            <label for="editDataOd">Data-od:</label>
+            <input type="date" id="editDataOd" name="editDataOd" required aria-describedby="editDataOdError">
+            <span id="editDataOdError" class="error" aria-live="polite"></span>
+
+            <label for="editDataDo">Data-do:</label>
+            <input type="date" id="editDataDo" name="editDataDo" required aria-describedby="editDataDoError">
+            <span id="editDataDoError" class="error" aria-live="polite"></span>
+
+            <label for="editDataOddania">Faktyczna data oddania:</label>
+            <input type="date" id="editDataOddania" name="editDataOddania" required aria-describedby="editDataOddaniaError">
+            <span id="editDataOddaniaError" class="error" aria-live="polite"></span>
+
+            <label for="editCena">Cena:</label>
+            <input type="number" id="editCena" name="cena" required step="0.01" min="0" placeholder="0.00" aria-describedby="editCenaError">
+            <span id="editCenaError" class="error" aria-live="polite"></span>
+            <div id="editButtons">
+                <button type="button" id="editAnuluj">Anuluj</button>
+                <button type="submit" id="editWyslij">Zatwierdz</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="../js/wyp-form.js"></script>
+    
+</body>
+</html>

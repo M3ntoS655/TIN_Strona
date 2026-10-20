@@ -1,0 +1,293 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+/* ==== Nagłówek ====  */
+.header {
+    width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.header nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.header nav a:hover, .header nav a.active {
+    color: #007BFF;
+}
+
+.header span {
+    color: #ccc;
+}
+
+/* ==== Nagłówek ====  */
+
+.klienci {
+    width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.status {
+    text-align: center;
+}
+
+.index {
+    width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.index p .klienci p { text-align: center; color: #555; line-height: 1.5; }
+
+.index hr { border: 0; border-top: 1px solid black; margin: 20px 0; }
+
+.index h3 { text-align: center; margin-bottom: 15px; }
+
+.przyciski { display: flex; flex-direction: column; gap: 10px; }
+
+h2 { text-align: center; margin-top: 0; }
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#wyslij {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#wyslij:hover { background-color: greenyellow; }
+
+#wyczysc {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(192, 48, 48);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#wyczysc:hover { background-color: red; }
+
+#anuluj {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: black; 
+    background: #fff; 
+    border-color: black;
+}
+
+#klient, #wypozyczenia, #bron {
+    background-color: #007BFF;
+    width: 100%;
+    padding: 12px; 
+    border: none; 
+    border-radius: 5px; 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer;
+}
+
+/* ==== Stopka ==== */
+
+.footer{
+    width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #007BFF;
+}
+
+/* ==== Stopka ==== */
+
+.container {
+    width: 800px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.container-wyp {
+    width: 1000px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.katalog-broni, .formularz-bron, .katalog-wyp{
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#tabela-klientow, .tabela-broni, .tabela-wyp {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#tabela-klientow th, #tabela-klientow td, .tabela-broni th, .tabela-broni td, .tabela-wyp th, .tabela-wyp td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#tabela-klientow th, .tabela-broni th, .tabela-wyp th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+#tabela-klientow tr:hover, .tabela-broni tr:hover, .tabela-wyp tr:hover {
+    background-color: #f5f5f5;
+}
+
+.invalid { border: 2px solid darkred; }
+
+.error {
+    display: block;
+    min-height: 20px;
+    margin-top: 5px;
+
+    color: darkred;
+    font-size: 0.9rem;
+}
+
+.button-danger-outline{ 
+    font-weight: 600;
+    padding: 10px 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: #b42333; 
+    background: #fff; 
+    border-color: #b42333; 
+}
+
+.button-danger-outline:hover {
+    background: #e78b96;
+}
+
+.button-edit, #editWyslij {
+    font-weight: 600;
+    padding: 10px 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: #007BFF; 
+    background: #fff; 
+    border-color: #007BFF; 
+}
+
+.button-edit:hover, #editWyslij:hover {
+    background: #b7d4f3;
+}
+
+.button-add-klient, .button-add-bron, .button-add-wyp {
+    display: block;
+    margin: 20px auto 0 auto;
+    font-weight: 600;
+    padding: 10px 50px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: #007BFF; 
+    background: #fff; 
+    border-color: #007BFF; 
+}
+
+.button-add-klient:hover, .button-add-bron:hover, .button-add-wyp:hover {
+    background: #f5f5f5;
+}
+
+dialog {
+  width: min(440px, calc(100% - 32px));
+  max-width: none;
+  border: 1px solid #e0e4ec;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 20px 70px #111d3573;
+  color: inherit;
+}
+
+.warning { color: #9f2636; font-size: .9rem; }
+
+.dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+
+#editButtons { display: flex; justify-content: center; gap: 10px; margin-top: 24px; }
+
+.button-danger{
+    font-weight: 600;
+    padding: 10px 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: #fff; 
+    background: #b42333; 
+    border-color: #b42333; 
+}
+
+.button-danger:hover {
+    color: #ffffffc0;
+}
+
+.button-secondary, #editAnuluj{
+    font-weight: 600;
+    padding: 10px 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: black; 
+    background: #fff; 
+    border-color: black; 
+}
+
+.button-secondary:hover, #anuluj:hover, #editAnuluj:hover{
+    background-color: #f5f5f5;
+}
